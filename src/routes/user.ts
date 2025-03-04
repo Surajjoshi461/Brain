@@ -14,6 +14,6 @@ router.post("/sign-up", signUpValidation, (...args) =>
   userController.createUser(...args)
 );
 
-router.post("/log-in", (...args) => userController.userLogin(...args));
+router.post("/log-in", (...args) => userController.userLogIn(...args));
 
-module.exports = { router, constant.API.BASE_PATH.USER};
+module.exports = { router, basePath: constant.API.BASE_PATH.USER };

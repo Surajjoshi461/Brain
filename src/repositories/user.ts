@@ -1,4 +1,3 @@
-import { UserSignUpDto } from "../commons/dtos/userSignUpDto";
 import userModel from "../model/user";
 import { UserType } from "../types/api/userType";
 

@@ -9,6 +9,7 @@ import { UserSignUpDto } from "../commons/dtos/userSignUpDto";
 import constant from "../commons/constant";
 import { LogInResponse } from "../types/response/user/logInResponse";
 import { LogInRequest } from "../types/request/user/logInRequest";
+import { UserLogInDto } from '../commons/dtos/userLogInDto'
 
 export class UserController {
   private _userService: UserService;
@@ -38,17 +39,18 @@ export class UserController {
 
   public async userLogIn(
     req: Request<EmptyObject, APIResponse<LogInResponse>, LogInRequest>,
-    res: APIResponse<LogInResponse>,
+    res: Response<APIResponse<LogInResponse>>,
     next: NextFunction
   ) {
     const userDto = new UserLogInDto(req.body);
     try {
-      const userResponse = await this._userService.userLogIn()
+      const userResponse = await this._userService.userLogIn(userDto)
       const response = new APIResponse<LogInResponse>(
         HttpStatus.CREATED,
         constant.ControllerMessage.SUCCESS,
         userResponse
       );
+      res.status(response.status).send(response)
     } catch (error) {
       console.log("Error in #UserController/userLogin");
       next(error);

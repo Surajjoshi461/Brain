@@ -9,9 +9,9 @@ export default {
     FAILED: "Failed",
     UPDATED: "Updated",
   },
-  API:{
-    BASE_PATH:{
+  API: {
+    BASE_PATH: {
       USER: '/api/v1/user'
-    }
-  }
-};
+    },
+  },
+}

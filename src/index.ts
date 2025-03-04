@@ -1,23 +1,26 @@
-import dotenv from "dotenv";
-dotenv.config();
-import express, { Express } from "express";
-import HttpStatus from "http-status-codes";
 import cors from "cors";
 import helmet from "helmet";
+import path from "path";
+import { config } from 'dotenv'
+config();
+const envFile = path.join(__dirname, '../.env.local')
+config({ path: envFile, override: true })
+import express, { Express } from "express";
+import HttpStatus from "http-status-codes";
 import responseTime from "response-time";
 import fs from "fs";
-import path from "path";
 
-import { mongoDBConnection } from "./config/dbConnection";
+import { serverConfig } from "./config";
 
 (async (): Promise<void> => {
   // mongoDBConnection();
+
   await _startExpressApi();
 })();
 
 async function _startExpressApi(): Promise<void> {
   const app = express();
-  const port = process.env.PORT || 3001;
+  const port = serverConfig.PORT || 3001;
   app.use(cors({ origin: true, credentials: true }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
