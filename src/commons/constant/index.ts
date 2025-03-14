@@ -11,7 +11,7 @@ export default {
   },
   API: {
     BASE_PATH: {
-      USER: '/api/v1/user'
+      USER: 'api/v1/user'
     },
   },
 }

@@ -1,5 +1,4 @@
 import { LogInRequest } from '../../types/request/user/logInRequest'
-import constant from '../constant';
 
 export class UserLogInDto {
   email: string;

@@ -9,8 +9,8 @@ export async function signUpValidation(
   next: NextFunction
 ) {
   try {
-    const { email, firstName, lastName, password } = req.body;
-    if (!email || !firstName || !lastName || !password) {
+    const { firstName, lastName, email, phoneNumber, password } = req.body;
+    if (!email || !firstName || !lastName || !password || !phoneNumber) {
       console.log("All fields are required");
       return next(Error("Please provide all fields"));
     }

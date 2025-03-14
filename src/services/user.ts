@@ -5,6 +5,8 @@ import { UserRepository } from "../repositories/user";
 import AuthTokenVerification from "../utils/authTokenVerification";
 import PasswordUtil from "../utils/passwordUtil"
 import { LogInResponse } from "../types/response/user/logInResponse";
+import ContactUsDto from "../commons/dtos/contactUsDto";
+import { ContactUsResponse } from "../types/response/user/contactUsResponse";
 
 export class UserService {
   private _userRepository: UserRepository;
@@ -42,5 +44,10 @@ export class UserService {
     }
     const userToken = await AuthTokenVerification.setUser(userDto);
     return { userId: isUserExist.userId, token: userToken }
+  }
+
+  public async contactUs(userDto: ContactUsDto): Promise<ContactUsResponse> {
+    //TODO: SURAJ JOSHI - 14/03/2025- add mailer method, which send the user contact form  
+    return { success: true }
   }
 }

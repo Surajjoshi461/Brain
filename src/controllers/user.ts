@@ -10,6 +10,9 @@ import constant from "../commons/constant";
 import { LogInResponse } from "../types/response/user/logInResponse";
 import { LogInRequest } from "../types/request/user/logInRequest";
 import { UserLogInDto } from '../commons/dtos/userLogInDto'
+import { ContactUsResponse } from "../types/response/user/contactUsResponse";
+import { ContactUsRequest } from "../types/request/user/contactUsRequest";
+import ContactUsDto from "../commons/dtos/contactUsDto";
 
 export class UserController {
   private _userService: UserService;
@@ -54,6 +57,26 @@ export class UserController {
     } catch (error) {
       console.log("Error in #UserController/userLogin");
       next(error);
+    }
+  }
+
+  public async contactUs(req: Request<EmptyObject, APIResponse<ContactUsResponse>, ContactUsRequest>,
+    res: Response<APIResponse<ContactUsResponse>>,
+    next: NextFunction
+  ) {
+    const userDto = new ContactUsDto(req.body)
+    try {
+      const contactUsResponse = await this._userService.contactUs(userDto);
+      const response = new APIResponse<ContactUsResponse>(
+        HttpStatus.OK,
+        constant.ControllerMessage.SUCCESS,
+        contactUsResponse
+      )
+      res.status(response.status).send(response);
+    } catch (error) {
+      console.log("Error in #UserController#contactUs method");
+      next(error);
+
     }
   }
 }
