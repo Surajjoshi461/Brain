@@ -36,19 +36,19 @@ async function _startExpressApi(): Promise<void> {
     }
   });
 
-  app.get("/", (req, res) => {
+  app.get("/", (_req, res) => {
     res
       .status(HttpStatus.OK)
       .send("🚀 Server is up and running! Ready to rock! 🤘");
   });
-  app.get("/help", (req, res) => {
+  app.get("/help", (_req, res) => {
     res
       .status(HttpStatus.OK)
       .send(
         "Need a hand? 🤝 You've reached the help center! How can I assist you?"
       );
   });
-  app.get("*", (req, res) => {
+  app.get("*", (_req, res) => {
     res
       .status(HttpStatus.FORBIDDEN)
       .send("Oops! Looks like you're lost in the code universe. 🚀💫");
