@@ -21,6 +21,7 @@ import { serverConfig } from "./config";
 async function _startExpressApi(): Promise<void> {
   const app = express();
   const port = serverConfig.PORT || 3001;
+
   app.use(cors({ origin: true, credentials: true }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -28,7 +29,13 @@ async function _startExpressApi(): Promise<void> {
   app.use(responseTime());
   app.disable('x-powered-by')
 
-  await _useRoute(app, ["routes"]);
+  fs.readdirSync(path.resolve(__dirname, 'routes')).forEach((file) => {
+    if (file.includes('.js') && !file.includes('.js.')) {
+      const { router, basePath } = require(`./routes/${file}`);
+      app.use(basePath, router);
+    }
+  });
+
   app.get("/", (req, res) => {
     res
       .status(HttpStatus.OK)
@@ -50,16 +57,4 @@ async function _startExpressApi(): Promise<void> {
   app.listen(port, () => {
     console.log(`Server is listening to port: ${port}`);
   });
-}
-
-async function _useRoute(app: Express, paths: Array<string>): Promise<void> {
-  const routesDirectory = path.resolve(__dirname, ...paths);
-  const files = fs.readdirSync(routesDirectory);
-  for (const file of files) {
-    if (file.endsWith(".js") && !file.endsWith(".js.")) {
-      const routePath = path.join(routesDirectory, file);
-      const { router, basePath } = await import(routePath);
-      app.use(basePath, router);
-    }
-  }
 }

@@ -19,8 +19,7 @@ router.post("/signup", signUpValidation, (...args) =>
 router.post("/login", (...args) => userController.userLogIn(...args));
 
 //contact-us
-
-router.post("/contactUs",(...args)=>{
+router.post("/contactus",(...args)=>{
   userController.contactUs(...args)
 })
 
