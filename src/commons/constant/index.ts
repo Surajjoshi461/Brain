@@ -8,10 +8,5 @@ export default {
     DELETED: "Deleted",
     FAILED: "Failed",
     UPDATED: "Updated",
-  },
-  API: {
-    BASE_PATH: {
-      USER: 'api/v1/user'
-    },
-  },
+  }
 }

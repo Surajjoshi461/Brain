@@ -1,6 +1,12 @@
 import mongoose from "mongoose";
 
-export async function mongoDBConnection(){
-    await mongoose.connect(process.env.MONGO_DB_URL || 'url');
-    console.log("MongoDB is Connected Successfully...!")
+import { serverConfig } from ".";
+
+export async function mongoDBConnection() {
+    try{
+        await mongoose.connect(serverConfig.MONGO_DB_URL);
+        console.log(`MongoDB is Connected Successfully...! on: ${serverConfig.MONGO_DB_URL}`)
+    }catch(error){
+        throw new Error(`Error while connecting to MongoDB. Error: ${error}`);
+    }
 }

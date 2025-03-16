@@ -11,21 +11,17 @@ export async function signUpValidation(
   try {
     const { firstName, lastName, email, phoneNumber, password } = req.body;
     if (!email || !firstName || !lastName || !password || !phoneNumber) {
-      console.log("All fields are required");
-      return next(Error("Please provide all fields"));
+      return next(Error("All fields are required"));
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      console.log("email is not valid");
       return next(new Error("Please provide correct email"));
     }
     if (password.length < 6) {
-      console.log("Password must be at least 6 characters");
       return next(new Error("Password must be at least 6 characters"));
     }
     next();
   } catch (error) {
-    console.log("Error in signUpValidation");
-    return next(error);
+    return next(`Error in signUpValidation. Error: ${error}`);
   }
 }

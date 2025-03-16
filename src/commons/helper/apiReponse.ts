@@ -1,5 +1,3 @@
-import HttpStatus from "http-status-codes";
-
 export interface EmptyObject {
   [key: string]: void;
 }

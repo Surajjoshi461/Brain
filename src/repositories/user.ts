@@ -1,4 +1,4 @@
-import userModel from "../model/user";
+import userModel from "../model/userModel";
 import { UserType } from "../types/api/userType";
 
 export class UserRepository {

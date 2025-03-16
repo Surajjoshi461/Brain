@@ -5,16 +5,16 @@ import { config } from 'dotenv'
 config();
 const envFile = path.join(__dirname, '../.env.local')
 config({ path: envFile, override: true })
-import express, { Express } from "express";
+import express from "express";
 import HttpStatus from "http-status-codes";
 import responseTime from "response-time";
 import fs from "fs";
 
 import { serverConfig } from "./config";
+import { mongoDBConnection } from "./config/dbConnection";
 
 (async (): Promise<void> => {
-  // mongoDBConnection();
-
+  mongoDBConnection();
   await _startExpressApi();
 })();
 

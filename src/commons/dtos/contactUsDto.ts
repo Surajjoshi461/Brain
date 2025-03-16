@@ -1,4 +1,4 @@
-import { ContactUsRequest } from "../../types/request/user/contactUsRequest"
+import { ContactUsRequest } from "../../types/request/contactUsRequest"
 
 export default class ContactUsDto {
     name: string;
