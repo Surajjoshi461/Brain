@@ -1,20 +1,19 @@
 import mongoose, { Document } from "mongoose";
 
 interface IUser extends Document {
-  userId: string;
   firstName: string;
   lastName: string;
   email: string;
   password: string;
+  phoneNumber: string;
+  address: string;
+  profilePic: string;
   emailVerified: boolean;
+  isActive: boolean;
 }
 
 const userSchema = new mongoose.Schema(
   {
-    userId: {
-      type: String,
-      required: true,
-    },
     firstName: {
       type: String,
       required: true,
@@ -32,7 +31,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    phoneNumber: {
+      type: String,
+      required: true,
+    },
+    address: {
+      type: String,
+      required: true,
+    },
+    profilePic: {
+      type: String,
+      required: true,
+    },
     emailVerified: {
+      type: Boolean,
+    },
+    isActive: {
       type: Boolean,
     },
   },

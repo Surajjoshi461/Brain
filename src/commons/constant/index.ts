@@ -8,5 +8,17 @@ export default {
     DELETED: "Deleted",
     FAILED: "Failed",
     UPDATED: "Updated",
-  }
-}
+  },
+  EXPRESS_ERRORS: {
+    INTERNAL_SERVER_ERROR: "Something went wrong",
+  },
+  VALIDATION: {
+    UNAUTHORIZE: "You are not authorize to perform access",
+    TOKEN_MISSING: "Token missing from header",
+    TOKEN_EXPIRED: "Token Expired",
+    USER_NOT_FOUND: "User not found",
+    INCORRECT_PASSWORD: "Incorrect password",
+    INACTIVE_USER: "User is not active",
+    INVALID_EMAIL: "Invalid email",
+  },
+};
