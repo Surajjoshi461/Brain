@@ -9,9 +9,9 @@ WORKDIR /app
 # Install dependencies separately to leverage layer caching
 COPY package*.json ./
 
-RUN npm install
+RUN npm ci
 
-RUN npm install -g typescript
+#RUN npm install -g typescript
 
 # ✅ Fix: Copy tsconfig.json before build
 COPY tsconfig.json ./
