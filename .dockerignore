@@ -1,29 +1,29 @@
-# Node modules - we install fresh in the Docker image
+# Node modules - fresh install in Docker
 node_modules
 
-# TypeScript source files (only dist is used in final image)
-src
-*.ts
-*.tsx
+# Don't exclude .ts files so that TypeScript build works
+# Just exclude them from production image (handled in Dockerfile by using dist/)
+# Removed: *.ts
+# Removed: src
 
 # Logs
 logs
 *.log
 npm-debug.log*
 
-# Environment files (you should handle them via GCP Secret Manager or Cloud Run config)
+# Environment files
 .env
 .env.*
 
-# OS and IDE stuff
+# OS and IDE files
 .DS_Store
 .vscode
 .idea
 
-# Git
+# Git files
 .git
 .gitignore
 
-# Other build artifacts
+# Build artifacts
 dist/*.map
 coverage
