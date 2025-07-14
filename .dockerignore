@@ -1,0 +1,29 @@
+# Node modules - we install fresh in the Docker image
+node_modules
+
+# TypeScript source files (only dist is used in final image)
+src
+*.ts
+*.tsx
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Environment files (you should handle them via GCP Secret Manager or Cloud Run config)
+.env
+.env.*
+
+# OS and IDE stuff
+.DS_Store
+.vscode
+.idea
+
+# Git
+.git
+.gitignore
+
+# Other build artifacts
+dist/*.map
+coverage
