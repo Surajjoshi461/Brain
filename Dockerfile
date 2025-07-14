@@ -3,23 +3,20 @@
 # -----------------------
 FROM node:18-alpine AS builder
 
-# Create app directory
+# Set working directory
 WORKDIR /app
 
-# Install dependencies separately to leverage layer caching
-COPY package*.json ./
-
-RUN npm ci
-
-#RUN npm install -g typescript
-
-# ✅ Fix: Copy tsconfig.json before build
+# ✅ Copy tsconfig.json before npm install (important for tsc to work)
 COPY tsconfig.json ./
 
-# Copy rest of the application code
+# ✅ Copy only package.json and package-lock.json and install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# ✅ Copy the rest of your source code (after tsconfig and deps)
 COPY . .
 
-# Build the project (make sure 'build' script runs 'tsc')
+# ✅ Build TypeScript (make sure package.json has "build": "tsc")
 RUN npm run build
 
 # -----------------------
@@ -27,19 +24,16 @@ RUN npm run build
 # -----------------------
 FROM node:18-alpine
 
-# Create app directory
 WORKDIR /app
 
-# Copy only necessary files from builder
+# ✅ Copy built code, deps, and package.json
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
-# Ensure production environment
 ENV NODE_ENV=production
 
-# Expose the port used by your app (Cloud Run uses 8080 by default)
 EXPOSE 8080
 
-# Start the app
+# ✅ Run the compiled code
 CMD ["node", "dist/index.js"]
