@@ -23,7 +23,9 @@ import { CustomErrorResponse } from "./commons/helper/errorHandler/customErrorRe
 
 async function _startExpressApi(): Promise<void> {
   const app = express();
-  const port = serverConfig.PORT || 7001;
+//  const port = serverConfig.PORT || 7001;
+  const port = process.env.PORT || serverConfig.PORT || 8080;
+
 
   app.use(cors({ origin: true, credentials: true }));
   app.use(express.json());
