@@ -1,37 +1,39 @@
-# Use an official Node.js LTS image
+# -----------------------
+# Build Stage
+# -----------------------
 FROM node:18-alpine AS builder
 
-# Set working directory
+# Create app directory
 WORKDIR /app
 
-# Install dependencies
+# Install dependencies separately to leverage layer caching
 COPY package*.json ./
 RUN npm ci
 
-# Copy the rest of the code
+# Copy rest of the application code
 COPY . .
 
-# Build the TypeScript project
+# Build the project (make sure 'build' script runs 'tsc')
 RUN npm run build
 
 # -----------------------
-# Production Image
+# Production Stage
 # -----------------------
 FROM node:18-alpine
 
-# Set working directory
+# Create app directory
 WORKDIR /app
 
-# Copy only the built files and dependencies
+# Copy only necessary files from builder
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 
-# Expose port (default Cloud Run port)
-EXPOSE 8080
-
-# Use environment variables (optional .env in Cloud Run)
+# Ensure production environment
 ENV NODE_ENV=production
+
+# Expose the port used by your app (Cloud Run uses 8080 by default)
+EXPOSE 8080
 
 # Start the app
 CMD ["node", "dist/index.js"]
