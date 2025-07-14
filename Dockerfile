@@ -8,7 +8,9 @@ WORKDIR /app
 
 # Install dependencies separately to leverage layer caching
 COPY package*.json ./
-RUN npm ci
+
+# ✅ Fix: Copy tsconfig.json before build
+COPY tsconfig.json ./
 
 # Copy rest of the application code
 COPY . .
