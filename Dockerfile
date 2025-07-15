@@ -12,6 +12,9 @@ COPY . .
 # Add this line temporarily to debug
 RUN ls -R /app
 
+# 🔍 Debug: List contents before build
+RUN echo "==== PROJECT STRUCTURE ====" && ls -la /app && echo "==== SRC CONTENT ====" && ls -la /app/src
+
 # Install dependencies
 RUN npm ci
 
