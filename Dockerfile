@@ -9,6 +9,8 @@ COPY package*.json ./
 COPY tsconfig.json ./
 
 COPY . .
+# Add this line temporarily to debug
+RUN ls -R /app
 
 # Install dependencies
 RUN npm ci
