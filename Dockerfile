@@ -8,11 +8,10 @@ WORKDIR /app
 COPY package*.json ./
 COPY tsconfig.json ./
 
+COPY . .
+
 # Install dependencies
 RUN npm ci
-
-# Copy the rest of the application code
-COPY . .
 
 # Build TypeScript code
 RUN npm run build
