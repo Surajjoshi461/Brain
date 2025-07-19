@@ -19,5 +19,5 @@ export interface ServerConfig {
 export const serverConfig: ServerConfig = {
     PORT: Number(env.PORT),
     JWT_SECRET_KEY: env.JWT_SECRET_KEY ?? '',
-    MONGO_DB_URL: env.MONGO_DB_URL
+    MONGO_DB_URL: env.MONGO_DB_URL ?? 'mongodb+srv://surajjoshi461:j7QCz5KXoGl0QEHa@tifinix.9ng4i.mongodb.net/?retryWrites=true&w=majority&appName=tifinix'
 }
